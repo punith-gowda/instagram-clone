@@ -1,30 +1,48 @@
 <template>
   <q-page class="constrain q-pa-md">
-    <q-card v-for="post in posts" :key="post.id" class="card-post q-mb-md" flat bordered>
-      <q-item>
-        <q-item-section avatar>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
-          </q-avatar>
-        </q-item-section>
+    <div class="row q-col-gutter-lg">
+      <div class="col-12 col-sm-8">
+        <q-card v-for="post in posts" :key="post.id" class="card-post q-mb-md" flat bordered>
+          <q-item>
+            <q-item-section avatar>
+              <q-avatar>
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+              </q-avatar>
+            </q-item-section>
 
-        <q-item-section>
-          <q-item-label class="text-bold">UserName</q-item-label>
-          <q-item-label caption>{{post.location}}</q-item-label>
-        </q-item-section>
-      </q-item>
+            <q-item-section>
+              <q-item-label class="text-bold">UserName</q-item-label>
+              <q-item-label caption>{{post.location}}</q-item-label>
+            </q-item-section>
+          </q-item>
 
-      <q-separator />
-      <q-img :src="post.imageUrl"></q-img>
-      <q-card>
-        <q-card-section>
-          <div>{{post.caption}}</div>
-          <div class="text-caption text-grey">{{post.date |  ToDate}}</div>
-        </q-card-section>
+          <q-separator />
+          <q-img :src="post.imageUrl"></q-img>
+          <q-card>
+            <q-card-section>
+              <div>{{post.caption}}</div>
+              <div class="text-caption text-grey">{{post.date | ToDate}}</div>
+            </q-card-section>
 
-        <q-card-section class="q-pt-none"></q-card-section>
-      </q-card>
-    </q-card>
+            <q-card-section class="q-pt-none"></q-card-section>
+          </q-card>
+        </q-card>
+      </div>
+      <div class="col-4 only-pc">
+        <q-item class="fixed">
+          <q-item-section avatar>
+            <q-avatar size="50px">
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+            </q-avatar>
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label class="text-bold">UserName</q-item-label>
+            <q-item-label caption>Danny</q-item-label>
+          </q-item-section>
+        </q-item>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -69,7 +87,7 @@ export default {
   },
   filters: {
     ToDate(value) {
-      return date.formatDate(value, 'YYYY-MM-DDTHH:mm:ss.SSSZ')
+      return date.formatDate(value, "MMMM D h:mmA");
     },
   },
 };
