@@ -1,0 +1,44 @@
+// app global css in SCSS form
+.text-grand-hotel {
+  font-family: 'Grand Hotel', 'Roboto', 'Helvetica neue', Arial, Helvetica, sans-serif;
+}
+
+.only-mobile {
+  @media (max-width: $breakpoint-xs-max) {
+    display: block;
+  }
+
+  @media (min-width: $breakpoint-sm-max) {
+    display: none;
+  }
+}
+
+.only-pc {
+  @media (max-width: $breakpoint-sm-max) {
+    display: none;
+  }
+
+  @media (min-width: $breakpoint-md-max) {
+    display: block;
+  }
+}
+
+.only-pc-text {
+  @media (max-width: $breakpoint-xs-max) {
+    text-align: center;
+  }
+}
+
+.only-pc-header {
+  @media (min-width: $breakpoint-xs-min) {
+    height: 70px;
+  }
+
+  @media (max-width: $breakpoint-sm-max) {
+    height: 50px;
+  }
+}
+.constrain{
+    max-width: 980px;
+    margin: 0 auto;
+}
