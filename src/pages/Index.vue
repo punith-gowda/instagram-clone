@@ -1,7 +1,7 @@
 <template>
   <q-page class="constrain q-pa-md">
     <div class="row q-col-gutter-lg">
-      <div class="col-12 col-sm-8">
+      <div class="col-12 col-md-8">
         <q-card v-for="post in posts" :key="post.id" class="card-post q-mb-md" flat bordered>
           <q-item>
             <q-item-section avatar>
