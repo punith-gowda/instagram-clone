@@ -18,5 +18,10 @@ quasar dev
 quasar build
 ```
 
+### In backend
+```bash
+Add the serviceAccountKey.js from your firebase account
+```
+
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
