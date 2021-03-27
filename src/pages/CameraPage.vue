@@ -2,7 +2,12 @@
   <q-page class="q-pa-md constrain-more">
     <div class="camera-frame q-pa-md">
       <video v-show="!imageCaptured" ref="video" autoplay class="full-width" />
-      <canvas v-show="imageCaptured" ref="canvas" class="full-width" height="240px" />
+      <canvas
+        v-show="imageCaptured"
+        ref="canvas"
+        class="full-width"
+        height="240px"
+      />
     </div>
     <div class="text-center q-pa-md">
       <q-btn
@@ -29,7 +34,12 @@
       </q-file>
 
       <div class="row justify-center q-col-gutter-lg">
-        <q-input v-model="post.caption" label="caption" class="col-12 col-sm-6" dense />
+        <q-input
+          v-model="post.caption"
+          label="caption"
+          class="col-12 col-sm-6"
+          dense
+        />
         <q-input
           v-model="post.location"
           :loading="locloading"
@@ -50,7 +60,14 @@
         </q-input>
       </div>
       <div class="row justify-center q-ma-md">
-        <q-btn unelevated rounded color="primary" label="Post now" />
+        <q-btn
+          unelevated
+          rounded
+          :disable="!post.caption || !post.photo"
+          color="primary"
+          @click="addPost()"
+          label="Post now"
+        />
       </div>
     </div>
   </q-page>
@@ -75,7 +92,7 @@ export default {
       imageUpload: [],
       hasCamerasupport: true,
       locloading: false,
-      camerabutton:true
+      camerabutton: true,
     };
   },
   computed: {
@@ -107,9 +124,6 @@ export default {
       this.imageCaptured = true;
       this.post.photo = this.dataURItoBlob(canvas.toDataURL());
       this.disableCamera();
-      
-
-
     },
     captureImgFall(file) {
       this.post.photo = file;
@@ -131,7 +145,8 @@ export default {
     disableCamera() {
       this.$refs.video.srcObject.getVideoTracks().forEach((track) => {
         track.stop();
-      });this.camerabutton = false
+      });
+      this.camerabutton = false;
     },
     dataURItoBlob(dataURI) {
       // convert base64 to raw binary data held in a string
@@ -193,6 +208,43 @@ export default {
         message: "Could not find your location",
       }),
         (this.locloading = false);
+    },
+    addPost() {
+      this.$q.loading.show();
+      let formdata = new FormData();
+      formdata.append("id", this.post.id);
+      formdata.append("caption", this.post.caption);
+      formdata.append("location", this.post.location);
+      formdata.append("date", this.post.date);
+      formdata.append("file", this.post.photo, this.post.id + ".png");
+
+      this.$axios
+        .post(`${process.env.API}/createpost`, formdata)
+        .then((Response) => {
+          console.log(Response);
+          this.$router.push("/");
+          this.$q.notify({
+            progress: true,
+            message: "You Added a post.",
+            color: "red",
+            actions: [
+              {
+                label: "Dismiss",
+                color: "yellow",
+              },
+            ],
+          });
+          this.$q.loading.hide();
+        })
+
+        .catch((err) => {
+          this.$q.dialog({
+            dark: true,
+            title: "Error",
+            message: "Something went Wrong please try again.",
+          });
+          this.$q.loading.hide();
+        });
     },
   },
   mounted() {

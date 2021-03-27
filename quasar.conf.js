@@ -3,8 +3,13 @@
  * the ES6 features that are supported by your Node version. https://node.green/
  */
 
+const { Loading } = require("quasar")
+
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
+
+let APIlocal = 'http://localhost:3000',
+  APIdeploy = 'https://punigram-backend.herokuapp.com'
 
 module.exports = function (/* ctx */) {
   return {
@@ -18,7 +23,7 @@ module.exports = function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
     boot: [
-      
+
       'axios',
     ],
 
@@ -43,6 +48,9 @@ module.exports = function (/* ctx */) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
+      env: {
+        API: APIlocal // APIlocal | APIdeploy
+      },
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
       // transpile: false,
@@ -62,7 +70,7 @@ module.exports = function (/* ctx */) {
       // extractCSS: false,
 
       // https://quasar.dev/quasar-cli/handling-webpack
-      extendWebpack (cfg) {
+      extendWebpack(cfg) {
       },
     },
 
@@ -77,7 +85,11 @@ module.exports = function (/* ctx */) {
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
-      config: {},
+      config: {
+        notify: { /* look at QUASARCONFOPTIONS from the API card (bottom of page) */ },
+        loading: { /* look at QUASARCONFOPTIONS from the API card (bottom of page) */ }
+      },
+
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -92,7 +104,7 @@ module.exports = function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Dialog']
+      plugins: ['Dialog', 'Notify', 'Loading']
     },
 
     // animations: 'all', // --- includes all animations
@@ -109,8 +121,8 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `Quasar App`,
-        short_name: `Quasar App`,
+        name: `Instagram-clone`,
+        short_name: `Instagram clone`,
         description: `A Quasar Framework app`,
         display: 'standalone',
         orientation: 'portrait',
@@ -182,7 +194,7 @@ module.exports = function (/* ctx */) {
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
       nodeIntegration: true,
 
-      extendWebpack (/* cfg */) {
+      extendWebpack(/* cfg */) {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       }
