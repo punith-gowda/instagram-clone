@@ -10,7 +10,7 @@ let fs = require('fs')
 let UUID = require('uuid-v4')
 const serviceAccount = require('./serviceAccountKey.json');
 
-admin.initializeApp({
+admin.initializeApp({       
     credential: admin.credential.cert(serviceAccount),
     storageBucket: "instagram-clone-9dd85.appspot.com/",
     databaseURL: "https://instagram-clone-9dd85-default-rtdb.firebaseio.com"

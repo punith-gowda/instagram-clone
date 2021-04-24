@@ -3,7 +3,7 @@
     <q-header class="bg-white text-grey-10 " bordered>
       <q-toolbar class="only-pc-header constrain" >
         <q-btn flat round color="primary" icon="camera" size="20px" to="/camera" class="only-pc" />
-        <q-toolbar-title class="text-grand-hotel text-bold only-pc-text">puniagram</q-toolbar-title>
+        <q-toolbar-title class="text-grand-hotel text-bold only-pc-text">Instagram-clone</q-toolbar-title>
         <q-btn
           flat
           round

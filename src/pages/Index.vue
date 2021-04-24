@@ -79,7 +79,7 @@
 
           <q-item-section>
             <q-item-label class="text-bold">UserName</q-item-label>
-            <q-item-label caption>Danny</q-item-label>
+            <q-item-label caption>punith</q-item-label>
           </q-item-section>
         </q-item>
       </div>

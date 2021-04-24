@@ -16,7 +16,7 @@
         @click="captureImg"
         round
         color="grey-10"
-        icon="camera"
+        icon="camera"   
         size="md"
       />
 
